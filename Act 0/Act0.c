@@ -5,9 +5,8 @@
 #include <time.h>
 #include <unistd.h>
 
-#define NUM_HILOS 5  // cantidad de números a generar
+#define NUM_HILOS 5
 
-// Función para verificar si un número es primo
 bool es_primo(int n) {
     if (n <= 1) return false;
     for (int i = 2; i * i <= n; i++) {
@@ -16,7 +15,7 @@ bool es_primo(int n) {
     return true;
 }
 
-// Función que ejecutará cada hilo
+// Función de cada hilo
 void* procesar_numero(void* arg) {
     int num = rand() % 100 + 1; // número aleatorio entre 1 y 100
 
@@ -44,7 +43,7 @@ int main() {
         pthread_create(&hilos[i], NULL, procesar_numero, NULL);
     }
 
-    // Esperar que terminen
+    // Se espera a que cada hilo termine
     for (int i = 0; i < NUM_HILOS; i++) {
         pthread_join(hilos[i], NULL);
     }
